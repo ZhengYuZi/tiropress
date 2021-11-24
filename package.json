@@ -1,0 +1,11 @@
+{
+  "name": "mark-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm dev --filter \"@tiro/press\""
+  },
+  "author": "",
+  "license": "ISC"
+}

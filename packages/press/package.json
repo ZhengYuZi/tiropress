@@ -1,0 +1,14 @@
+{
+  "name": "@tiro/press",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tiropress"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tiro/docs": "workspace:^1.0.0"
+  }
+}
