@@ -2,6 +2,8 @@ const { createServer } = require("vite")
 const vue = require("@vitejs/plugin-vue")
 const path = require("path")
 const mdToVue = require('./plugins/vite-plugin-mdToVue')
+const { findFileDir } = require('./utils')
+const pressPath = findFileDir(path.resolve(".."), "tiropress")
 
 ;(async () => {
   const server = await createServer({
@@ -12,6 +14,7 @@ const mdToVue = require('./plugins/vite-plugin-mdToVue')
     resolve: {
       alias: {
         vue: "vue/dist/vue.esm-bundler.js",
+        "@md": path.resolve(pressPath,'..')
       },
     },
     server: {

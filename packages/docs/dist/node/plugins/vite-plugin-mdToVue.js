@@ -21,7 +21,7 @@ module.exports = function mdToVue() {
       }
       return null
     },
-    async load(id) {
+    load(id) {
       if (id === "themeIndex") {
         const mountFileUrl = `${esmPressPath}/theme/index.js`
 
@@ -35,7 +35,7 @@ module.exports = function mdToVue() {
         sidebar.forEach(item=>{
           item.children.forEach(child=>{
             if(child.link === '/'){
-              child.component = `../../../../${mdPath}${child.link}index.md`
+              child.component = `../../../../${mdPath}/index.md`
             }else{
               child.component = `../../../../${mdPath}${child.link}.md`
             }

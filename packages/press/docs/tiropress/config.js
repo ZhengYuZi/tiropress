@@ -7,8 +7,8 @@ module.exports = {
         text: "介绍",
         path:'/',
         children: [
-          { text: "什么是tiropress", link: "/" },
-          { text: "开始使用", link: "/article/input" },
+          { text: "什么是tiropress", link: "/", title: "什么是tiropress" },
+          { text: "开始使用", link: "/article/input", title: "开始使用" },
         ],
       },
     ],
