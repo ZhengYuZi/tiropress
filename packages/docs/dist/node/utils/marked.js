@@ -1,6 +1,10 @@
 const { marked } = require("marked")
 const hljs = require("highlight.js")
 
+/**
+ * 根据marked内容创建vue template
+ * @param {string} html marked内容
+ */
 function createTemplate(html) {
   let insertScript = ""
 
