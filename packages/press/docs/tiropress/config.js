@@ -4,7 +4,7 @@ module.exports = {
     sidebar: [
       // 侧边栏
       {
-        text: "介绍",
+        text: "tiropress",
         path:'/',
         children: [
           { text: "什么是tiropress", link: "/", title: "什么是tiropress" },

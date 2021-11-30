@@ -12,7 +12,7 @@ config.forEach(item=>{
             name: child.text,
             component: comps[child.component],
             meta: {
-                title: child.title
+                title: `${child.title} | ${item.text}`
             }
         })
     })
