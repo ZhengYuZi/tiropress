@@ -7,6 +7,7 @@ const hljs = require("highlight.js")
  */
 function createTemplate(html) {
   let insertScript = ""
+  let contents = []
 
   const renderer = {
     html(text) {
@@ -15,6 +16,13 @@ function createTemplate(html) {
       insertScript = scriptText.replace(/(^\s*)|(\s*$)/g, "")
       return ""
     },
+    heading(text, level) {
+      contents.push({
+        level: level,
+        title: text
+      })
+      return `<h${level}>${text}</h${level}>`
+    }
   }
 
   marked.setOptions({
@@ -34,7 +42,10 @@ function createTemplate(html) {
           ${insertScript}
       </script>`
 
-  return template
+  return {
+    template,
+    contents
+  }
 }
 
 module.exports = createTemplate

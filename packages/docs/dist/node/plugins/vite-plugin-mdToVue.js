@@ -27,7 +27,7 @@ module.exports = function mdToVue() {
         })
         replaceStr += `<${value[0]}${attr} />`
       })
-      html = html.replace('{{headmore}}', replaceStr)
+      html = html.replace('{{...}}', replaceStr)
       return html
     },
     resolveId(source) {
@@ -48,12 +48,14 @@ module.exports = function mdToVue() {
       if (id === "pressConfig") {
         const sidebar = config.themeConfig.sidebar
         sidebar.forEach((item) => {
-          item.children.forEach((child) => {
-            if (child.link === "/") {
-              child.component = `../../../../${mdPath}/index.md`
-            } else {
-              child.component = `../../../../${mdPath}${child.link}.md`
-            }
+          item.hasOwnProperty("contents") && item.contents.forEach((content) => {
+            content.children.forEach((child)=>{
+              if (child.link === "/") {
+                child.component = `../../../../${mdPath}/index.md`
+              } else {
+                child.component = `../../../../${mdPath}${child.link}.md`
+              }
+            })
           })
         })
         return `export default ${JSON.stringify(sidebar)}`
@@ -62,9 +64,10 @@ module.exports = function mdToVue() {
     },
     transform(code, id) {
       if (id.endsWith(".md")) {
-        return createTemplate(code)
+        const { template,contents } = createTemplate(code)
+        return template
       }
       return code
-    },
+    }
   }
 }
