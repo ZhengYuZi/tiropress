@@ -8,13 +8,13 @@ module.exports = {
         content: "tiropress文档"
       }
     ],
-    // [
-    //   'link',
-    //   {
-    //     rel: "icon", 
-    //     href: "https://www.tailwindcss.cn/favicon-32x32.png"
-    //   }
-    // ]
+    [
+      'link',
+      {
+        rel: "icon",
+        href: "/logo.png"
+      }
+    ]
   ],
   themeConfig: {
     sidebar: [
@@ -22,26 +22,26 @@ module.exports = {
       {
         text: "tiropress",
         path: '/',
+      },
+      {
+        text: "test",
+        path: '/article',
         contents: [
           {
             text: '入门',
             children: [
-              { text: "什么是tiropress", link: "/", title: "什么是tiropress" },
-              { text: "开始使用", link: "/article/input", title: "开始使用" },
+              { text: "开始", link: "/", title: "开始" },
+              { text: "使用", link: "/input", title: "使用" },
             ]
           },
           {
             text: '基础组件',
             children: [
-              { text: "边框", link: "/article/border", title: "边框" },
-              { text: "按钮", link: "/article/button", title: "按钮" },
+              { text: "边框", link: "/border", title: "边框" },
+              { text: "按钮", link: "/button", title: "按钮" },
             ]
           }
         ]
-      },
-      {
-        text: "test",
-        path: '/test'
       }
     ],
   },

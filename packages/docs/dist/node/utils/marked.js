@@ -7,7 +7,7 @@ const hljs = require("highlight.js")
  */
 function createTemplate(html) {
   let insertScript = ""
-  let contents = []
+  let contents = ''
 
   const renderer = {
     html(text) {
@@ -17,12 +17,11 @@ function createTemplate(html) {
       return ""
     },
     heading(text, level) {
-      contents.push({
-        level: level,
-        title: text
-      })
-      return `<h${level}>${text}</h${level}>`
-    }
+      if(level > 1){
+        contents += `<li class="ml-${level}"><a href="#${text}">${text}</a></li>`
+      }
+      return `<h${level} id="${text}">${text}<a class="header-anchor" href="#${text}">#</a></h${level}>`
+    },
   }
 
   marked.setOptions({
@@ -37,15 +36,18 @@ function createTemplate(html) {
           <div class="markdown-body">
               ${marked(html)}
           </div>
+          <div class="article-content" v-if="${contents !== ''}">
+              <h5>目录</h5>
+              <ul>
+                  ${contents}
+              </ul>
+          </div>
       </template>
       <script setup>
           ${insertScript}
       </script>`
 
-  return {
-    template,
-    contents
-  }
+  return template
 }
 
 module.exports = createTemplate

@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <div class="main-container">
-            <aside class="sidebar">
-                <AsidePage :data="hasAside" />
+            <aside class="sidebar" v-if="asideData?.length">
+                <AsidePage :data="asideData" />
             </aside>
             <main class="page">
                 <article ref="article">
@@ -12,12 +12,6 @@
                         </keep-alive>
                     </router-view>
                 </article>
-                <div class="article-content">
-                    <h5>本页目录</h5>
-                    <ul>
-                        <li></li>
-                    </ul>
-                </div>
             </main>
         </div>
     </div>
@@ -29,18 +23,14 @@ import { useRoute } from 'vue-router'
 import AsidePage from './comps/Aside.vue'
 
 const route = useRoute()
-const hasAside = ref()
+const asideData = ref()
 
 watch(
     () => route.params,
     newParams => {
-        hasAside.value = {
-            site: newParams.hasAside,
-            path: route.path
-        }
+        asideData.value = newParams
     }
 )
-
 
 </script>
 
@@ -93,8 +83,10 @@ body {
         margin-right: 280px;
     }
     #app .main-container .page .article-content {
-        min-width: 280px;
+        width: 280px;
+        max-width: 280px;
         height: 600px;
+        font-size: 14px;
         position: fixed;
         right: 0;
         top: 50px;
@@ -106,6 +98,29 @@ body {
         list-style: none;
         padding: 0;
         margin: 0;
+    }
+    #app .main-container .page .article-content ul li {
+        cursor: pointer;
+        padding: 6px 0;
+    }
+    #app .main-container .page .article-content ul li a {
+        text-decoration: none;
+        color: #6b7280;
+    }
+    #app .main-container .page .article-content ul li a:hover{
+        color: #000000;
+    }
+    #app .main-container .page .article-content ul li.ml-3{
+        margin-left: 1rem;
+    }
+    #app .main-container .page .article-content ul li.ml-4{
+        margin-left: 2rem;
+    }
+    #app .main-container .page .article-content ul li.ml-5{
+        margin-left: 3rem;
+    }
+    #app .main-container .page .article-content ul li.ml-6{
+        margin-left: 4rem;
     }
 }
 </style>

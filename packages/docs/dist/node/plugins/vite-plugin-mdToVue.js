@@ -48,12 +48,17 @@ module.exports = function mdToVue() {
       if (id === "pressConfig") {
         const sidebar = config.themeConfig.sidebar
         sidebar.forEach((item) => {
+          if (item.path === "/") {
+            item.component = `../../../../${mdPath}/index.md`
+          } else {
+            item.component = `../../../../${mdPath}${item.path}/index.md`
+          }
           item.hasOwnProperty("contents") && item.contents.forEach((content) => {
             content.children.forEach((child)=>{
               if (child.link === "/") {
-                child.component = `../../../../${mdPath}/index.md`
-              } else {
-                child.component = `../../../../${mdPath}${child.link}.md`
+                child.component = item.component
+              }else{
+                child.component = `../../../../${mdPath}${item.path}${child.link}.md`
               }
             })
           })
@@ -64,7 +69,7 @@ module.exports = function mdToVue() {
     },
     transform(code, id) {
       if (id.endsWith(".md")) {
-        const { template,contents } = createTemplate(code)
+        const template = createTemplate(code)
         return template
       }
       return code

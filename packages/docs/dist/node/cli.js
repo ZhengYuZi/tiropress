@@ -7,9 +7,12 @@ const pressPath = findFileDir(path.resolve(".."), "tiropress")
 
 //console.log(process.argv);
 
+console.log(path.resolve(pressPath, "../public"));
+
 ;(async () => {
   const server = await createServer({
     root: path.join(__dirname, "../../"),
+    publicDir: path.resolve(pressPath, "../public"),
     plugins: [mdToVue(), vue({ include: [/\.vue$/, /\.md$/] })],
     resolve: {
       alias: {

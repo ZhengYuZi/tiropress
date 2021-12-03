@@ -1,11 +1,16 @@
 <template>
     <div class="sidebar-container">
-        <ul class="sidebar-links" v-if="props.data && props.data.site >= 0">
-            <li v-for="item in config[props.data.site].contents" :key="item">
-                <h4 class="links-title">{{ item.text }}</h4>
+        <div class="sidebar-logo">
+            <a href="/">
+                <img src="https://element-plus.gitee.io/images/element-plus-logo.svg" alt="">
+            </a>
+        </div>
+        <ul class="sidebar-links">
+            <li v-for="item in data" :key="item">
+                <h4 class="links-title">{{ item.title }}</h4>
                 <ul>
-                    <li class="links-item" :class="[child.link === props.data.path ? 'active':'']" v-for="child in item.children" :key="child" @click="linkTo(child.link)">
-                        <span>{{ child.text }}</span>
+                    <li class="links-item" :class="[child.path === route.path ? 'active':'']" v-for="child in item.children" :key="child" @click="linkTo(child.path)">
+                        <span>{{ child.title }}</span>
                     </li>
                 </ul>
             </li>
@@ -14,9 +19,9 @@
 </template>
 
 <script setup>
-import config from "pressConfig"
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const route = useRoute()
 
 const props = defineProps({
     data: {
@@ -37,6 +42,13 @@ const linkTo = (link) => {
     overflow-y: auto;
     padding: 30px 20px;
     box-sizing: border-box;
+}
+
+.sidebar-logo{
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 20px 10px;
 }
 
 .sidebar-container ul{
@@ -66,7 +78,7 @@ const linkTo = (link) => {
 }
 
 .sidebar-container .links-item.active{
-    background-color: rgba(0, 121, 214, 0.3);
+    background-color: rgba(0, 132, 255,0.5);
     border-radius: 3px;
     color: #ffffff;
 }

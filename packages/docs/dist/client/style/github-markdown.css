@@ -141,6 +141,22 @@
     color: var(--color-accent-fg);
     text-decoration: none;
   }
+
+  .markdown-body a.header-anchor {
+    float: left;
+    margin-top: 0.08em;
+    margin-left: -0.87em;
+    padding-right: 0.23em;
+    opacity: 0;
+  }
+  .markdown-body h1:hover a.header-anchor,
+  .markdown-body h2:hover a.header-anchor,
+  .markdown-body h3:hover a.header-anchor,
+  .markdown-body h4:hover a.header-anchor,
+  .markdown-body h5:hover a.header-anchor,
+  .markdown-body h6:hover a.header-anchor{
+    opacity: 1;
+  }
   
   .markdown-body a:active,
   .markdown-body a:hover {
