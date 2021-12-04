@@ -12,25 +12,47 @@
                         </keep-alive>
                     </router-view>
                 </article>
+                <ArrowPage :data="arrowData" />
             </main>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import AsidePage from './comps/Aside.vue'
+import ArrowPage from './comps/Arrow.vue'
 
 const route = useRoute()
 const asideData = ref()
+const arrowData = ref({
+    last: null,
+    next: null
+})
 
-watch(
-    () => route.params,
-    newParams => {
-        asideData.value = newParams
+watchEffect(()=>{
+    const params = route.params
+    asideData.value = params
+    if(Object.keys(params).length){
+        arrowData.value = getArrow(params)
     }
-)
+})
+
+const getArrow=(params)=>{
+    let children = []
+    let data = {}
+    params.forEach(item=>{
+        children.push(...item.children)
+    })
+    children.forEach((item,index)=>{
+        if(item.path === route.path){
+            data.last = children[index-1]
+            data.next = children[index+1]
+        }
+    })
+    return data
+}
 
 </script>
 
@@ -60,8 +82,8 @@ body {
 }
 
 #app .main-container .page {
-    padding: 40px 35px 64px;
-    display: flex;
+    width: 100%;
+    padding: 40px 50px 64px;
 }
 
 #app .main-container .page .article-content {
