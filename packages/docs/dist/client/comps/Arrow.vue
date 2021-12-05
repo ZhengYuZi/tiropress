@@ -34,7 +34,6 @@ const props = defineProps({
 .arrow-container {
   margin-top: 30px;
   padding: 50px 0;
-  border-top: 1px solid #eee;
   display: flex;
   justify-content: space-between;
 }
