@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm dev --filter \"@tiro/press\""
+    "dev": "pnpm docs:dev --filter \"@tiro/press\"",
+    "build": "pnpm docs:build --filter \"@tiro/press\""
   },
   "author": "",
   "license": "ISC"

@@ -22,12 +22,11 @@
 </template>
 
 <script setup>
-import { watchEffect } from "vue";
 const props = defineProps({
   data: {
     type: Object,
   },
-});
+})
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 const path = require("path")
-const { findFileDir } = require("../utils/utils")
+const { findFileDir, configHeadFormat } = require("../utils/utils")
 const createTemplate = require("../utils/marked")
 
 const pressPath = findFileDir(path.resolve(".."), "tiropress")
@@ -15,19 +15,8 @@ module.exports = function mdToVue() {
   return {
     name: "md-to-vue",
     transformIndexHtml(html) {
-      let replaceStr = ''
-      config.head.forEach(value=>{
-        if(typeof value[0] !== 'string') {
-          value.reverse()
-        }
-        const keys = Object.keys(value[1])
-        let attr = ''
-        keys.forEach(item=>{
-          attr += ` ${item}="${value[1][item]}"`
-        })
-        replaceStr += `<${value[0]}${attr} />`
-      })
-      html = html.replace('{{...}}', replaceStr)
+      const replaceStr = configHeadFormat(config.head)
+      html = html.replace("{{...}}", replaceStr)
       return html
     },
     resolveId(source) {
@@ -53,15 +42,16 @@ module.exports = function mdToVue() {
           } else {
             item.component = `../../../../${mdPath}${item.path}/index.md`
           }
-          item.hasOwnProperty("contents") && item.contents.forEach((content) => {
-            content.children.forEach((child)=>{
-              if (child.link === "/") {
-                child.component = item.component
-              }else{
-                child.component = `../../../../${mdPath}${item.path}${child.link}.md`
-              }
+          item.hasOwnProperty("contents") &&
+            item.contents.forEach((content) => {
+              content.children.forEach((child) => {
+                if (child.link === "/") {
+                  child.component = item.component
+                } else {
+                  child.component = `../../../../${mdPath}${item.path}${child.link}.md`
+                }
+              })
             })
-          })
         })
         return `export default ${JSON.stringify(sidebar)}`
       }
@@ -73,6 +63,6 @@ module.exports = function mdToVue() {
         return template
       }
       return code
-    }
+    },
   }
 }

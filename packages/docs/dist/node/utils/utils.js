@@ -28,6 +28,23 @@ function findFileDir(path, it) {
   }
 }
 
+function configHeadFormat(config) {
+  let replaceStr = ""
+  config.forEach((value) => {
+    if (typeof value[0] !== "string") {
+      value.reverse()
+    }
+    const keys = Object.keys(value[1])
+    let attr = ""
+    keys.forEach((item) => {
+      attr += ` ${item}="${value[1][item]}"`
+    })
+    replaceStr += `<${value[0]}${attr} />`
+  })
+  return replaceStr
+}
+
 module.exports = {
-  findFileDir
+  findFileDir,
+  configHeadFormat
 }

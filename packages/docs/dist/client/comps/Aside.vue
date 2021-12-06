@@ -2,7 +2,8 @@
     <div class="sidebar-container">
         <div class="sidebar-logo">
             <a href="/">
-                <img src="https://element-plus.gitee.io/images/element-plus-logo.svg" alt="">
+                <img src="/logo.png" alt="">
+                <span>TiroPress</span>
             </a>
         </div>
         <ul class="sidebar-links">
@@ -46,9 +47,25 @@ const linkTo = (link) => {
 
 .sidebar-logo{
     width: 100%;
-    text-align: center;
+    height: 50px;
     box-sizing: border-box;
     padding: 0 20px 10px;
+}
+.sidebar-logo a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    font-size: 20px;
+}
+.sidebar-logo a span{
+    padding: 0 5px;
+}
+.sidebar-logo img{
+    width: auto;
+    height: 40px;
 }
 
 .sidebar-container ul{
@@ -74,12 +91,12 @@ const linkTo = (link) => {
 .sidebar-container .links-item:hover{
     color: #000000;
     border-radius: 3px;
-    background-color: rgba(240, 240, 240);
+    background-color: rgb(246, 246, 246);
 }
 
 .sidebar-container .links-item.active{
-    background-color: rgba(0, 132, 255,0.5);
+    background-color: rgba(51, 112, 255, 0.06);
     border-radius: 3px;
-    color: #ffffff;
+    color: rgb(51, 112, 255);
 }
 </style>

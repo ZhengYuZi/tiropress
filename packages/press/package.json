@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tiropress"
+    "docs:dev": "tiropress dev docs",
+    "docs:build": "tiropress build docs"
   },
   "author": "",
   "license": "ISC",
