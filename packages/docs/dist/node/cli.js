@@ -32,7 +32,7 @@ const env = process.env.npm_lifecycle_event
   } else if(e === production){
     await build({
       root: path.join(__dirname, "../../"),
-      base: '/client/',
+      base: './',
       publicDir: path.resolve(pressPath, "../public"),
       plugins: [mdToVue(), vue({ include: [/\.vue$/, /\.md$/] })],
       resolve: {
@@ -41,8 +41,9 @@ const env = process.env.npm_lifecycle_event
         },
       },
       build: {
+        outDir: '../dist',
         rollupOptions: {
-          external: ['themeIndex', 'pressConfig']
+          // external: ['themeIndex', 'pressConfig']
         }
       }
     })
