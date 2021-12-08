@@ -6,8 +6,6 @@ const comps = import.meta.glob("../../../../**/*.md")
 const routes = []
 const contents = {}
 
-console.log(config)
-
 config.forEach((item, index) => {
   routes.push({
     path: item.path,
@@ -45,11 +43,9 @@ config.forEach((item, index) => {
     })
 })
 
-console.log(contents);
-
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {

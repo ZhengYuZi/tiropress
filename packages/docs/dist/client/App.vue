@@ -5,7 +5,7 @@
                 <AsidePage :data="asideData" />
             </aside>
             <main class="page">
-                <article ref="article">
+                <article>
                     <router-view v-slot="{ Component }">
                         <keep-alive>
                             <component :is="Component" />
@@ -25,11 +25,8 @@ import AsidePage from './comps/Aside.vue'
 import ArrowPage from './comps/Arrow.vue'
 
 const route = useRoute()
-const asideData = ref()
-const arrowData = ref({
-    last: null,
-    next: null
-})
+const asideData = ref([])
+const arrowData = ref({})
 
 watchEffect(()=>{
     const params = route.params

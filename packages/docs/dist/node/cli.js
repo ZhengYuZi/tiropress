@@ -23,8 +23,8 @@ const env = process.env.npm_lifecycle_event
       },
       server: {
         port: 3000,
-        open: true, // 设置服务启动时是否自动打开浏览器
-        cors: true, // 允许跨域
+        open: true,
+        cors: true,
       },
     })
     await server.listen()
@@ -32,7 +32,7 @@ const env = process.env.npm_lifecycle_event
   } else if(e === production){
     await build({
       root: path.join(__dirname, "../../"),
-      base: './',
+      base: '/',
       publicDir: path.resolve(pressPath, "../public"),
       plugins: [mdToVue(), vue({ include: [/\.vue$/, /\.md$/] })],
       resolve: {
@@ -42,9 +42,6 @@ const env = process.env.npm_lifecycle_event
       },
       build: {
         outDir: '../dist',
-        rollupOptions: {
-          // external: ['themeIndex', 'pressConfig']
-        }
       }
     })
   }
