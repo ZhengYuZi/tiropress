@@ -1,33 +1,40 @@
+import NotFound from "../comps/NotFound.vue"
 import { createRouter, createWebHistory } from "vue-router"
 import config from "pressConfig"
 
 const comps = import.meta.glob("../../../../**/*.md")
 
-const routes = []
+const routes = [
+  {
+    path: "/not-found",
+    name: NotFound,
+    component: NotFound,
+    meta: {
+      title: 404,
+    },
+  },
+  {
+    path: "/:pathMatch(.*)",
+    redirect: "/not-found",
+  },
+]
+
 const contents = {}
 
 config.forEach((item, index) => {
-  routes.push({
-    path: item.path,
-    name: item.text,
-    component: comps[item.component],
-    meta: {
-      title: item.text,
-    },
-  })
-  contents[item.path] = []
   const aside = item.hasOwnProperty("contents")
-  aside &&
+  if (aside && item.contents.length) {
+    contents[item.path] = []
     item.contents.forEach((content, num) => {
       contents[item.path].push({
         title: content.text,
-        children: []
+        children: [],
       })
       content.children.forEach((child) => {
-        if(child.link === '/'){
-          child.link = ''
+        if (child.link === "/") {
+          child.link = ""
         }
-        routes.push({
+        routes.unshift({
           path: `${item.path}${child.link}`,
           name: child.text,
           component: comps[child.component],
@@ -37,10 +44,20 @@ config.forEach((item, index) => {
         })
         contents[item.path][num].children.push({
           title: child.text,
-          path: `${item.path}${child.link}`
+          path: `${item.path}${child.link}`,
         })
       })
     })
+  } else {
+    routes.unshift({
+      path: item.path,
+      name: item.text,
+      component: comps[item.component],
+      meta: {
+        title: item.text,
+      },
+    })
+  }
 })
 
 const router = createRouter({
@@ -58,7 +75,7 @@ const router = createRouter({
 
 //路由发生变化修改页面title
 router.beforeEach((to, from, next) => {
-  const path = '/' + to.path.split('/')[1]
+  const path = "/" + to.path.split("/")[1]
   to.params = contents[path]
   if (to.meta.title) {
     document.title = to.meta.title

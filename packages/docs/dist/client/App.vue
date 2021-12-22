@@ -1,18 +1,14 @@
 <template>
-    <div id="app">
+    <div id="App">
         <div class="main-container">
             <aside class="sidebar" v-if="asideData?.length">
                 <AsidePage :data="asideData" />
             </aside>
             <main class="page">
                 <article>
-                    <router-view v-slot="{ Component }">
-                        <keep-alive>
-                            <component :is="Component" />
-                        </keep-alive>
-                    </router-view>
+                    <router-view></router-view>
                 </article>
-                <ArrowPage :data="arrowData" />
+                <ArrowPage :data="arrowData" v-if="arrowData" />
             </main>
         </div>
     </div>
@@ -26,12 +22,13 @@ import ArrowPage from './comps/Arrow.vue'
 
 const route = useRoute()
 const asideData = ref([])
-const arrowData = ref({})
+const arrowData = ref(null)
 
 watchEffect(()=>{
     const params = route.params
     asideData.value = params
-    if(Object.keys(params).length){
+    arrowData.value = null
+    if(Array.isArray(params)){
         arrowData.value = getArrow(params)
     }
 })

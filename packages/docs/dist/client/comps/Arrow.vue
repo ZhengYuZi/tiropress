@@ -1,7 +1,7 @@
 <template>
-  <div class="arrow-container">
+  <div class="arrow-container" v-if="data !== null">
     <div class="arrow-inner">
-      <a class="arrow-box arrow-left" :href="data.last.path" v-if="data.last">
+      <a class="arrow-box arrow-left" v-if="data.last" @click="linkTo(data.last.path)">
         <i class="iconfont icon-jiantou"></i>
         <div class="arrow-info">
           <span>PREVIOUS</span>
@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="arrow-inner">
-      <a class="arrow-box arrow-right" :href="data.next.path" v-if="data.next" @click="">
+      <a class="arrow-box arrow-right" v-if="data.next" @click="linkTo(data.next.path)">
         <i class="iconfont icon-jiantou3"></i>
         <div class="arrow-info">
           <span>NEXT</span>
@@ -22,11 +22,19 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const props = defineProps({
   data: {
     type: Object,
   },
 })
+
+const linkTo = (path)=>{
+  if(!path)return
+  router.push({ path: path })
+}
 </script>
 
 <style scoped>
