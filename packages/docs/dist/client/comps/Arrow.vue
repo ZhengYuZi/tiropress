@@ -33,7 +33,7 @@ const props = defineProps({
 
 const linkTo = (path)=>{
   if(!path)return
-  router.push({ path: path })
+  router.push(path)
 }
 </script>
 

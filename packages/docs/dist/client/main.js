@@ -7,4 +7,4 @@ import 'highlight.js/styles/github.css'
 import './style/mweb-lark.css'
 import './style/iconfont.css'
 
-createApp(App).use(router).use(components).mount('#app')
+createApp(App).use(components).use(router).mount('#app')

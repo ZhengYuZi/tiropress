@@ -1,4 +1,4 @@
-import NotFound from "../comps/NotFound.vue"
+//import NotFound from "../comps/NotFound.vue"
 import { createRouter, createWebHistory } from "vue-router"
 import config from "pressConfig"
 
@@ -7,8 +7,8 @@ const comps = import.meta.glob("../../../../**/*.md")
 const routes = [
   {
     path: "/not-found",
-    name: NotFound,
-    component: NotFound,
+    name: 'NotFound',
+    component: ()=>import('../comps/NotFound.vue'),
     meta: {
       title: 404,
     },
@@ -36,7 +36,7 @@ config.forEach((item, index) => {
         }
         routes.unshift({
           path: `${item.path}${child.link}`,
-          name: child.text,
+          name: `${child.text}`,
           component: comps[child.component],
           meta: {
             title: `${child.title} | ${item.text}`,
@@ -51,11 +51,11 @@ config.forEach((item, index) => {
   } else {
     routes.unshift({
       path: item.path,
-      name: item.text,
+      name: `${item.text}`,
       component: comps[item.component],
       meta: {
         title: item.text,
-      },
+      }
     })
   }
 })
@@ -70,7 +70,7 @@ const router = createRouter({
         behavior: "smooth",
       }
     }
-  },
+  }
 })
 
 //路由发生变化修改页面title

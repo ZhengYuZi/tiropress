@@ -6,7 +6,7 @@
             </aside>
             <main class="page">
                 <article>
-                    <router-view></router-view>
+                    <router-view />
                 </article>
                 <ArrowPage :data="arrowData" v-if="arrowData" />
             </main>

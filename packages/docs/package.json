@@ -5,15 +5,12 @@
     "tiropress": "bin/tiropress.js"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^1.6.1",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "@vue/compiler-sfc": "^3.2.6",
     "highlight.js": "^11.3.1",
     "marked": "^4.0.3",
-    "vite": "^2.5.4",
+    "vite": "^2.7.7",
     "vue": "^3.2.6",
     "vue-router": "4"
-  },
-  "devDependencies": {
-    "@vue/compiler-sfc": "^3.2.6",
-    "chokidar": "^3.5.2"
   }
 }
